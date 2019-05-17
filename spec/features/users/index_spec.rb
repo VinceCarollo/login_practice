@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'When visiting the users page' do
-  describe 'it shows a list of all users' do
 
-    before :each do
-      @user_1 = User.create!(name: 'Vince', email_address: 'vincecarollo@gmail.com')
-      @user_2 = User.create!(name: 'Kate', email_address: 'krjdh8@gmail.com')
-    end
+  before :each do
+    @user_1 = User.create!(name: 'Vince', email_address: 'vincecarollo@gmail.com', password: '1234')
+    @user_2 = User.create!(name: 'Kate', email_address: 'krjdh8@gmail.com', password: '12345')
+  end
+
+  describe 'it shows a list of all users' do
 
     it 'shows their basic attributes' do
       visit users_path
@@ -24,13 +25,6 @@ RSpec.describe 'When visiting the users page' do
       end
 
     end
-    # As a Visitor
-    # When I visit the user index
-    # And click on 'Register as User'
-    # I am taken to a new user form
-    # When I fill out that form and click 'Create User'
-    # I am redirected back to user index
-    # And see the new user
 
     describe 'when clicking on register as User' do
       it 'can create a new user' do
@@ -43,6 +37,7 @@ RSpec.describe 'When visiting the users page' do
 
         fill_in :user_name, with: 'New User'
         fill_in :user_email_address, with: "newuser@gmail.com"
+        fill_in :user_password, with: "password"
         click_on "Create User"
 
         expect(User.last.name).to eq('New User')
@@ -66,6 +61,7 @@ RSpec.describe 'When visiting the users page' do
 
         fill_in :user_name, with: 'New User'
         fill_in :user_email_address, with: ""
+        fill_in :user_password, with: '1234'
         click_on "Create User"
 
         expect(page).to have_content("Must Enter Email Address")
@@ -87,5 +83,17 @@ RSpec.describe 'When visiting the users page' do
         expect(current_path).to eq(new_user_path)
       end
     end
+  end
+
+  describe 'when clicking on log in' do
+
+    it 'takes user to log in page' do
+      visit users_path
+
+      click_link "Log In"
+
+      expect(current_path).to eq('/login')
+    end
+
   end
 end
