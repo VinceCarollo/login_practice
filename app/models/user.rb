@@ -2,12 +2,8 @@ class User < ApplicationRecord
   validates_presence_of :name, :email_address, :password
 
   def self.authenticate(email, password)
-    if User.exists?(email_address: email)
-      user = User.find_by(email_address: email)
-      user.password == password
-    else
-      false
-    end
+    user = User.find_by(email_address: email)
+    user && user.password == password
   end
 
   def user_exists?
