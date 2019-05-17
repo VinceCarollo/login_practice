@@ -7,4 +7,7 @@
   </section>
   <p><%= '-' * 60 %></p>
 <% end %>
-<%= link_to "Register as User", new_user_path %>
+<button type='button' name='create_user_button'><%= link_to "Register as User", new_user_path %></button><br>
+<% if session[:login] != true %>
+  <button type="button" name="log_in_button"><%= link_to "Log In", '/login' %></button>
+<% end %>
