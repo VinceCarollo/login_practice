@@ -28,6 +28,18 @@ RSpec.describe 'when on the login page' do
       expect(page).to_not have_content("Log In")
     end
 
+    it 'lets me login with upcased email' do
+      visit login_path
+
+      fill_in :email_address, with: 'ViNCEcArollo@gMAIL.com'
+      fill_in :password, with: '1234'
+      click_on "Log Me In!"
+
+      expect(current_path).to eq(users_path)
+      expect(page).to have_content("Welcome #{@user.name}, you are logged in!")
+      expect(page).to_not have_content("Log In")
+    end
+
     it "doesn't let me login with the wrong password or email" do
       visit login_path
 

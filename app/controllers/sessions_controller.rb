@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
+
   def new
   end
 
   def create
+    params[:email_address].downcase!
     if User.authenticate(params[:email_address], params[:password])
       user = User.find_by(email_address: params[:email_address])
       session[:login] = true
@@ -13,4 +15,10 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
   end
+
+  def destroy
+    session[:login] = false
+    redirect_to users_path
+  end
+
 end
