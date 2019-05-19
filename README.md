@@ -1,24 +1,4 @@
-# README
+# Login Practice
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Purpose
+This project was a jump into the world of sessions and cookies. It has very basic login, logout, and authorization functionality. My main takeaway on this project was how to work with sessions. I have created a sessions controller with actions, new, create, and destroy to handle user logins. I hope to come back to this project and add encryption functionality to the storage of passwords.
